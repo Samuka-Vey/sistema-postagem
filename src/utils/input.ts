@@ -3,10 +3,12 @@ import path from 'node:path';
 
 const inputPath = path.resolve(__dirname, 'stdin.txt');
 
-let input = fs.readFileSync(inputPath, 'utf8');
-var lines = input.split(/\s+/);
-var currentLine = 0;
+let inputed = fs.readFileSync(inputPath, 'utf8');
+let lines = inputed.split(/\r?\n/);
 
-export default function input_ready(): string {
+let currentLine = 0;
+
+export function input(): string | undefined {
+  if (currentLine >= lines.length) return undefined;
   return lines[currentLine++];
 }

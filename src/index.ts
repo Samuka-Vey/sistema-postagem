@@ -1,2 +1,3 @@
-import { print } from '../src/utils/print';
-import input from '../src/utils/input';
+import main from '../src/lista1/ex3';
+
+main();
