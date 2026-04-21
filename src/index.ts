@@ -1,3 +1,3 @@
-import main from '../src/lista1/ex4';
+import main from '../src/lista1/ex5';
 
-console.log(main());
+main();
