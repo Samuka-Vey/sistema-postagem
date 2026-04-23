@@ -1,3 +1,3 @@
-import main from '../src/lista1/ex9';
+import main from '../src/lista1/ex10';
 
 main();
