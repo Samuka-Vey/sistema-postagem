@@ -99,6 +99,36 @@ function updatePost(title: string, newContent: string): void {
   print('Post atualizado com sucesso!');
 }
 
+let path_auto_increment = path.resolve(dir, 'auto_increment.txt');
+function autoIncrementPost(): void {
+  if (!fs.existsSync(path_auto_increment)) {
+    fs.writeFileSync(path_auto_increment, '0', 'utf8');
+  }
+  let post = fs.readFileSync(path_auto_increment, {
+    encoding: 'utf8',
+    flag: 'r',
+  });
+
+  let newPostAuto = {};
+  let buffer = post.split('\n');
+
+  for (let i = 0; i < buffer.length; i++) {
+    if (i % 2 === 0) {
+      newPostAuto = {
+        ...newPostAuto,
+        [buffer[i]]: buffer[i + 1],
+      };
+    } else {
+      newPostAuto = {
+        ...newPostAuto,
+        [buffer[i - 1]]: buffer[i],
+      };
+    }
+  }
+  for (let [key, _] of Object.entries(newPostAuto)) {
+    print(key.split(`${key}`));
+  }
+}
 export default function main() {
   while (true) {
     print(`
@@ -107,12 +137,13 @@ export default function main() {
       [3] Buscar post
       [4] Deletar post
       [5] Atualizar post
-      [6] Sair
+      [6] auto increment post
+      [7] Sair
     `);
 
     const answer = Number(input('Escolha uma opção: '));
 
-    if (answer === 6) {
+    if (answer === 7) {
       print('Saindo...');
       break;
     }
@@ -135,6 +166,8 @@ export default function main() {
         input('Digite o título do post para atualizar: ') || '';
       const newContent = input('Digite o novo conteúdo do post: ') || '';
       updatePost(updateTitle, newContent);
+    } else if (answer === 6) {
+      autoIncrementPost();
     } else {
       print('Opção inválida!');
     }
