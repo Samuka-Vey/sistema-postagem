@@ -1,16 +1,20 @@
-import { UserFactory } from './poo/factory/UserFactory';
+import { StudyGeneric, DataBase } from './poo/generics/aula01';
 
-const client = UserFactory.createClient({
-  name: 'John Doe',
-  age: 30,
-  typeUser: 'client',
+const el = new StudyGeneric(['a', 'b', 'c']);
+const el2 = new StudyGeneric([1, 2, 3]);
+const el3 = new StudyGeneric([true, false, true]);
+const db = new DataBase();
+
+db.addUser({
+  name: 'Samuelson',
+  age: 22,
+  email: '',
 });
 
-const employee = UserFactory.createEmployee({
-  name: 'Jane Smith',
-  age: 25,
-  typeUser: 'employee',
-});
+const list = db.listUsers();
 
-console.log(client);
-console.log(employee);
+el.firstElement();
+el2.firstElement();
+el3.firstElement();
+el.showArray();
+console.log(list);
